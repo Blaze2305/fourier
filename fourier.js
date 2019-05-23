@@ -28,14 +28,22 @@ function draw(){
     circs[j].update(circs[j-1]);
   }
   points.unshift(circs[n-1].py+circs[n-1].y);
-  pointsxy.push([circs[n-1].px+circs[n-1].x,circs[n-1].py+circs[n-1].y]);
+  pointsxy.unshift([circs[n-1].px+circs[n-1].x,circs[n-1].py+circs[n-1].y]);
   if(points.length>200){
     points.pop();
   }
   //c.points();
-
+  if(pointsxy.length>150){
+    pointsxy.pop();
+  }
   push();
-
+  beginShape()
+  noFill();
+  stroke(255);
+  for(let m=0;m<pointsxy.length;m+=1){
+      vertex(pointsxy[m][0],pointsxy[m][1])
+  }
+  endShape();
   pop();
 
   push();
